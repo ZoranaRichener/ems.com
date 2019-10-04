@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDeptMenadzerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDeptMenadzerLabel_odDatuma}" for="odDatuma" />
+                    <h:inputText id="odDatuma" value="#{deptMenadzerController.selected.odDatuma}" title="#{bundle.EditDeptMenadzerTitle_odDatuma}" required="true" requiredMessage="#{bundle.EditDeptMenadzerRequiredMessage_odDatuma}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditDeptMenadzerLabel_doDatuma}" for="doDatuma" />
+                    <h:inputText id="doDatuma" value="#{deptMenadzerController.selected.doDatuma}" title="#{bundle.EditDeptMenadzerTitle_doDatuma}" required="true" requiredMessage="#{bundle.EditDeptMenadzerRequiredMessage_doDatuma}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditDeptMenadzerLabel_zaposleni}" for="zaposleni" />
+                    <h:selectOneMenu id="zaposleni" value="#{deptMenadzerController.selected.zaposleni}" title="#{bundle.EditDeptMenadzerTitle_zaposleni}" required="true" requiredMessage="#{bundle.EditDeptMenadzerRequiredMessage_zaposleni}">
+                        <f:selectItems value="#{zaposleniController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDeptMenadzerLabel_departmani}" for="departmani" />
+                    <h:selectOneMenu id="departmani" value="#{deptMenadzerController.selected.departmani}" title="#{bundle.EditDeptMenadzerTitle_departmani}" required="true" requiredMessage="#{bundle.EditDeptMenadzerRequiredMessage_departmani}">
+                        <f:selectItems value="#{departmaniController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{deptMenadzerController.update}" value="#{bundle.EditDeptMenadzerSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDeptMenadzerViewLink}"/>
+                <br />
+                <h:commandLink action="#{deptMenadzerController.prepareList}" value="#{bundle.EditDeptMenadzerShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDeptMenadzerIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

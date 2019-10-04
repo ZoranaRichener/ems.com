@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPlateTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPlateEmpty}" rendered="#{plateController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{plateController.items.rowCount > 0}">
+                    <h:outputText value="#{plateController.pagination.pageFirstItem + 1}..#{plateController.pagination.pageLastItem + 1}/#{plateController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{plateController.previous}" value="#{bundle.Previous} #{plateController.pagination.pageSize}" rendered="#{plateController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{plateController.next}" value="#{bundle.Next} #{plateController.pagination.pageSize}" rendered="#{plateController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{plateController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_platePK_odDatuma}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platePK.odDatuma}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_plata}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.plata}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_doDatuma}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.doDatuma}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_zaposleni}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.zaposleni}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{plateController.prepareView}" value="#{bundle.ListPlateViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{plateController.prepareEdit}" value="#{bundle.ListPlateEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{plateController.destroy}" value="#{bundle.ListPlateDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{plateController.prepareCreate}" value="#{bundle.ListPlateCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPlateIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

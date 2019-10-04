@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateZaposleniTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_zaposleniBr}" for="zaposleniBr" />
+                    <h:inputText id="zaposleniBr" value="#{zaposleniController.selected.zaposleniBr}" title="#{bundle.CreateZaposleniTitle_zaposleniBr}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_zaposleniBr}"/>
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_datumRodjenja}" for="datumRodjenja" />
+                    <h:inputText id="datumRodjenja" value="#{zaposleniController.selected.datumRodjenja}" title="#{bundle.CreateZaposleniTitle_datumRodjenja}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_datumRodjenja}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_ime}" for="ime" />
+                    <h:inputText id="ime" value="#{zaposleniController.selected.ime}" title="#{bundle.CreateZaposleniTitle_ime}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_ime}"/>
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_prezime}" for="prezime" />
+                    <h:inputText id="prezime" value="#{zaposleniController.selected.prezime}" title="#{bundle.CreateZaposleniTitle_prezime}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_prezime}"/>
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_pol}" for="pol" />
+                    <h:inputText id="pol" value="#{zaposleniController.selected.pol}" title="#{bundle.CreateZaposleniTitle_pol}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_pol}"/>
+                    <h:outputLabel value="#{bundle.CreateZaposleniLabel_angazovanOd}" for="angazovanOd" />
+                    <h:inputText id="angazovanOd" value="#{zaposleniController.selected.angazovanOd}" title="#{bundle.CreateZaposleniTitle_angazovanOd}" required="true" requiredMessage="#{bundle.CreateZaposleniRequiredMessage_angazovanOd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{zaposleniController.create}" value="#{bundle.CreateZaposleniSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{zaposleniController.prepareList}" value="#{bundle.CreateZaposleniShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateZaposleniIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

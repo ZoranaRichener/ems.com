@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePlateTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePlateLabel_platePK_odDatuma}" for="platePK_odDatuma" />
+                    <h:inputText id="platePK_odDatuma" value="#{plateController.selected.platePK.odDatuma}" title="#{bundle.CreatePlateTitle_platePK_odDatuma}" required="true" requiredMessage="#{bundle.CreatePlateRequiredMessage_platePK_odDatuma}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePlateLabel_plata}" for="plata" />
+                    <h:inputText id="plata" value="#{plateController.selected.plata}" title="#{bundle.CreatePlateTitle_plata}" required="true" requiredMessage="#{bundle.CreatePlateRequiredMessage_plata}"/>
+                    <h:outputLabel value="#{bundle.CreatePlateLabel_doDatuma}" for="doDatuma" />
+                    <h:inputText id="doDatuma" value="#{plateController.selected.doDatuma}" title="#{bundle.CreatePlateTitle_doDatuma}" required="true" requiredMessage="#{bundle.CreatePlateRequiredMessage_doDatuma}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePlateLabel_zaposleni}" for="zaposleni" />
+                    <h:selectOneMenu id="zaposleni" value="#{plateController.selected.zaposleni}" title="#{bundle.CreatePlateTitle_zaposleni}" required="true" requiredMessage="#{bundle.CreatePlateRequiredMessage_zaposleni}">
+                        <f:selectItems value="#{zaposleniController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{plateController.create}" value="#{bundle.CreatePlateSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{plateController.prepareList}" value="#{bundle.CreatePlateShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePlateIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

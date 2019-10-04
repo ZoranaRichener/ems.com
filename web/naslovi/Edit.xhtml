@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditNasloviTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditNasloviLabel_nasloviPK_naslov}" for="nasloviPK_naslov" />
+                    <h:inputText id="nasloviPK_naslov" value="#{nasloviController.selected.nasloviPK.naslov}" title="#{bundle.EditNasloviTitle_nasloviPK_naslov}" required="true" requiredMessage="#{bundle.EditNasloviRequiredMessage_nasloviPK_naslov}"/>
+                    <h:outputLabel value="#{bundle.EditNasloviLabel_nasloviPK_odDatuma}" for="nasloviPK_odDatuma" />
+                    <h:inputText id="nasloviPK_odDatuma" value="#{nasloviController.selected.nasloviPK.odDatuma}" title="#{bundle.EditNasloviTitle_nasloviPK_odDatuma}" required="true" requiredMessage="#{bundle.EditNasloviRequiredMessage_nasloviPK_odDatuma}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditNasloviLabel_doDatuma}" for="doDatuma" />
+                    <h:inputText id="doDatuma" value="#{nasloviController.selected.doDatuma}" title="#{bundle.EditNasloviTitle_doDatuma}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditNasloviLabel_zaposleni}" for="zaposleni" />
+                    <h:selectOneMenu id="zaposleni" value="#{nasloviController.selected.zaposleni}" title="#{bundle.EditNasloviTitle_zaposleni}" required="true" requiredMessage="#{bundle.EditNasloviRequiredMessage_zaposleni}">
+                        <f:selectItems value="#{zaposleniController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{nasloviController.update}" value="#{bundle.EditNasloviSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditNasloviViewLink}"/>
+                <br />
+                <h:commandLink action="#{nasloviController.prepareList}" value="#{bundle.EditNasloviShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditNasloviIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
